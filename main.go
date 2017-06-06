@@ -26,7 +26,7 @@ const (
 		#version 410
 		out vec4 frag_colour;
 		void main() {
-			frag_colour = vec4(1, 1, 1, 1.0);
+			frag_colour = vec4(1, 0, 0, 1.0);
 		}
 	` + "\x00"
 )
@@ -57,8 +57,9 @@ func draw(vao uint32, window *glfw.Window, program uint32) {
 	gl.UseProgram(program)
 
 	gl.BindVertexArray(vao)
-	gl.DrawArrays(gl.TRIANGLES, 0, int32(len(triangle)/3))
-
+	gl.DrawArrays(gl.LINE_LOOP, 0, int32(len(triangle)/3))
+	
+	
 	glfw.PollEvents()
 	window.SwapBuffers()
 }
@@ -74,7 +75,7 @@ func initGlfw() *glfw.Window {
 	glfw.WindowHint(glfw.OpenGLProfile, glfw.OpenGLCoreProfile)
 	glfw.WindowHint(glfw.OpenGLForwardCompatible, glfw.True)
 
-	window, err := glfw.CreateWindow(width, height, "Conway's Game of Life", nil, nil)
+	window, err := glfw.CreateWindow(width, height, "Fun with OpenGL", nil, nil)
 	if err != nil {
 		panic(err)
 	}
